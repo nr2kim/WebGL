@@ -40,9 +40,16 @@
 			// lines are drawn between each consecutive pair of vertices, but not between the first and last ( the line is not closed.)
 
 			var line = new THREE.Line(geometry, material);
+			function render() { // render loop
+				requestAnimationFrame( render );
+				line.rotation.y += 0.05;
+				renderer.render( scene, camera );
+			} // this will create a loop that causes the renderer to draw the scene 60 times per second.
+			
 
 			scene.add(line);
 			renderer.render(scene, camera);
+			render();
 		</script>
 		<div id="info" >Description</div>
 
