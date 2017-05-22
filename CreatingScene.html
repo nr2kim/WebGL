@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			// THREE.PerspectiveCamera( field of view, aspect ratio (almost always innerWidth/innerHeight), near - nearest distance that an object can appear, far- furthest distance that an object can appear)
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			var geometry = new THREE.BoxGeometry( 1, 1, 1 ); // creating a cube : BoxGeometry(x,y,z)
+			var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			var cube = new THREE.Mesh( geometry, material );
+			// A mesh is an object that takes a geometry and applies a material to it, which we then can insert to our scene, andd move freely around
+			scene.add( cube );
+
+			camera.position.z = 5;
+
+			function render() { // render loop
+				requestAnimationFrame( render );
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+				renderer.render( scene, camera );
+			} // this will create a loop that causes the renderer to draw the scene 60 times per second.
+			render();
+		</script>
+	</body>
+</html>
